@@ -53,3 +53,7 @@ a.active {
   font-weight: bold;
   color: #eff6ff;
 }
+
+.blog p {
+  padding: 1rem 1rem;
+}

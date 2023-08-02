@@ -5,9 +5,9 @@ import NavigationBar from './header/NavigationBar';
 
 function AppLayout() {
   return (
-    <div className=" mx-auto grid max-w-7xl gap-4 px-4  py-40 sm:grid-cols-[auto_1fr]">
+    <div className="mx-auto mt-32 grid max-w-[1500px] gap-4 px-4 sm:grid-cols-[auto_1fr]">
       <SideBar />
-      <div className=" relative mb-8 flex select-none flex-col overflow-x-hidden rounded-2xl bg-slate-50 px-4 py-2 shadow-xl">
+      <div className="relative mb-8 flex select-none flex-col rounded-2xl bg-slate-100 px-4 py-2 shadow-xl">
         <Header />
         <NavigationBar />
         <Outlet />

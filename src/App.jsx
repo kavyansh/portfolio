@@ -2,8 +2,9 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import AppLayout from './components/AppLayout';
 import About from './pages/About/About';
 import Blog from './pages/Blog/Blog';
+import BlogPost from './pages/Blog/BlogPost';
 
-const router = createBrowserRouter([
+export const routes = [
   {
     element: <AppLayout />,
     children: [
@@ -19,9 +20,15 @@ const router = createBrowserRouter([
         path: '/blogs',
         element: <Blog />,
       },
+      {
+        path: '/blogs/:blogId',
+        element: <BlogPost />,
+      },
     ],
   },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 function App() {
   return <RouterProvider router={router} />;

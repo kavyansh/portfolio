@@ -2,7 +2,7 @@ function UserDetails() {
   const liClassName = 'my-2 flex items-center justify-start text-md gap-2';
 
   return (
-    <div className="my-2 py-4">
+    <div className="my-2 py-1">
       <ul>
         <li className={liClassName}>
           <svg className="inline" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">

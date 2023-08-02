@@ -14,10 +14,10 @@ const navCloseIcon = (
 );
 
 function NavigationBar() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="absolute right-0 top-0 ">
+    <div className="absolute right-0 top-[-20px]">
       <NavigationItems isOpen={isOpen} />
       <div
         onClick={() => setIsOpen((isOpen) => !isOpen)}

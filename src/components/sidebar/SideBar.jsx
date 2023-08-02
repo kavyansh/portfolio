@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Avatar from './Avatar';
 import Button from '../ui/Button';
 import UserDetails from './UserDetails';
@@ -6,27 +6,49 @@ import UserDetails from './UserDetails';
 function SideBar() {
   const sideBar = useRef(null);
   const [sideBarTopMargin, setSideBarTopMargin] = useState(0);
+  const [scrollEventAttached, setScrollEventAttached] = useState(false);
   const scrollLimit = useRef(0);
+
+  const sideBarStyles = {
+    base: `sidebar flex items-center rounded-2xl bg-slate-50 px-4 py-2 pb-2 shadow-xl sm:flex-col`,
+  };
 
   useEffect(
     function () {
+      // if (scrollEventAttached) return;
       function handleScroll() {
-        if (window.scrollY + 100 > scrollLimit.current) return;
-        if (sideBarTopMargin + 90 < 0 || window.scrollY - 90 < 0) setSideBarTopMargin(0);
-        else setSideBarTopMargin(window.scrollY - 50);
+        if (window.scrollY > 0 && sideBarTopMargin === 0) {
+          setSideBarTopMargin(10);
+        } else if (sideBarTopMargin > 0 && window.scrollY === 0) {
+          setSideBarTopMargin(0);
+        }
       }
       window.addEventListener('scroll', handleScroll);
       scrollLimit.current = document.body.scrollHeight;
+      setScrollEventAttached(true);
     },
-    [sideBarTopMargin],
+    [sideBarTopMargin, scrollEventAttached],
   );
 
   return (
-    <div>
+    <div ref={sideBar}>
       <div
-        ref={sideBar}
-        style={{ marginTop: sideBarTopMargin, paddingTop: sideBarTopMargin > 0 ? '10rem' : '4rem' }}
-        className="sidebar px- relative mt-20 flex items-center rounded-2xl bg-slate-50 py-2 pb-2 shadow-xl sm:w-72 sm:flex-col"
+        style={
+          sideBarTopMargin > 0
+            ? {
+                paddingTop: '10rem',
+                position: 'sticky',
+                marginTop: `${sideBarTopMargin}px`,
+                top: `10px`,
+              }
+            : {
+                paddingTop: '4.5rem',
+                position: 'relative',
+                marginTop: `${sideBarTopMargin}px`,
+                top: '0px',
+              }
+        }
+        className={sideBarStyles.base}
       >
         <SideBarTop sideBarTopMargin={sideBarTopMargin} />
         <SideBarBottom />
@@ -46,13 +68,13 @@ function SideBarTop({ sideBarTopMargin }) {
       </div>
 
       <h1
-        style={{ paddingTop: sideBarTopMargin > 0 ? '6.4rem' : '3rem' }}
+        style={{ paddingTop: sideBarTopMargin > 0 ? '5.6rem' : '3rem' }}
         className="mb-2 pt-6 font-merriweather text-3xl transition-all duration-300 ease-linear"
       >
         Yash <span className=" font-semibold">Srivastava</span>
       </h1>
       <h2 className="my-1 rounded-full bg-gray-100 px-4 py-1 text-lg">Software Engineer</h2>
-      <div className="my-4">
+      <div className="my-2.5">
         <ul className="flex gap-4 opacity-50">
           <li>
             <a href="">
