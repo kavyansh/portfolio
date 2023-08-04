@@ -10,7 +10,9 @@ function AppLayout() {
       <div className="relative mb-8 flex select-none flex-col rounded-2xl bg-slate-100 px-4 py-2 shadow-xl">
         <Header />
         <NavigationBar />
-        <Outlet />
+        <main className="h-auto">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

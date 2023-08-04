@@ -7,6 +7,7 @@ function BlogPost() {
   const [searchParams, setSearchParams] = useSearchParams();
   const slug = searchParams.get('slug');
   const [post, setPost] = useState(null);
+  const { title, coverImage, content } = post ? post : {};
 
   useEffect(
     function () {
@@ -20,13 +21,17 @@ function BlogPost() {
     [slug],
   );
 
+  if (!post) return <h1>Loading...</h1>;
+
   return (
-    <div>
-      {post ? (
-        <div className="blog p-4 text-xl" dangerouslySetInnerHTML={{ __html: post.content }}></div>
-      ) : (
-        <h1>Loading...</h1>
+    <div className="m-4 h-auto rounded-lg bg-white p-4">
+      <div className="m-8 p-4 text-center text-5xl font-semibold">{title}</div>
+      {coverImage && (
+        <div className="mx-20 mb-10 h-[16%]">
+          <img src={coverImage} className="mx-auto h-full w-auto rounded-xl object-cover object-center" />
+        </div>
       )}
+      <div className="blog-post blog h-auto p-4 text-xl" dangerouslySetInnerHTML={{ __html: content }}></div>
     </div>
   );
 }
