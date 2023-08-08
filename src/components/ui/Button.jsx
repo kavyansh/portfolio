@@ -1,8 +1,6 @@
-import { Link, useNavigation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Button({ children, type, link = '', fileName = '', onClick = null }) {
-  const navigation = useNavigation();
-
   if (type === 'download')
     return (
       <Link
